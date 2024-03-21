@@ -17,10 +17,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let _ = (scene as? UIWindowScene) else { return }
         let viewController = ViewController()
             let navigationController = UINavigationController(rootViewController: viewController)
-            // Установите navigationController как корневой контроллер окна
             window?.rootViewController = navigationController
             window?.makeKeyAndVisible()
-//            return true
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
