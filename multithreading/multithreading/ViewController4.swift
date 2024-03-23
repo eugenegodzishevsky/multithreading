@@ -7,7 +7,9 @@
 
 import UIKit
 
-final class ViewController: UIViewController {
+
+
+final class ViewController4: UIViewController {
     
     private let nextButton: UIButton = {
         let button = UIButton()
@@ -20,47 +22,30 @@ final class ViewController: UIViewController {
     
     private let taskLabel: UILabel = {
         let label = UILabel()
-        label.text = "Дан сервис, через который записываем фразы в массив, используя цикл"
-        label.textAlignment = .center
+        label.text = "Написать как называется проблема №1 в коде и решить ее"
         label.numberOfLines = 0
+        label.textAlignment = .center
         label.backgroundColor = .darkGray
         label.translatesAutoresizingMaskIntoConstraints = false
         label.layer.cornerRadius = 20
         return label
     }()
     
-    
-    
-    
     override func viewDidLoad() {
-        super.viewDidLoad()
+            super.viewDidLoad()
         setupUI()
         
-        let phrasesService = PhrasesService()
-        let semaphore = DispatchSemaphore(value: 1)
-        
-        for i in 0..<10 {
-            DispatchQueue.global(qos: .utility).async {
-                semaphore.wait()
-                phrasesService.addPhrase("Phrase \(i)")
-                semaphore.signal()
+        let serialQueue = DispatchQueue(label: "com.example.myQueue")
+
+         serialQueue.async {
+            serialQueue.async { // Синхронный вызов внутри асинхронной очереди приводит к блокировке асинхронной очереди
+                print("This will never be printed.")
             }
-        }
-        DispatchQueue.main.async {
-            print(phrasesService.phrases)
-        }
-    }
-    
-    class PhrasesService {
-        var phrases: [String] = []
-        
-        func addPhrase(_ phrase: String) {
-            phrases.append(phrase)            
-        }
+         }
     }
     
     @objc func buttonPressed() {
-        let nextViewController = ViewController2()
+        let nextViewController = ViewController5()
         navigationController?.pushViewController(nextViewController, animated: true)
     }
     
@@ -81,5 +66,3 @@ final class ViewController: UIViewController {
         nextButton.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     }
 }
-
-

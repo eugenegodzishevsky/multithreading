@@ -7,7 +7,23 @@
 
 import UIKit
 
-final class ViewController: UIViewController {
+actor PhrasesService {
+    
+    let semaphore = DispatchSemaphore(value: 1)
+    
+    var phrases: [String] = []
+    
+    func addPhrase(_ phrase: String) async {
+        semaphore.wait()
+        phrases.append(phrase)
+        semaphore.signal()
+    }
+}
+
+final class ViewController2: UIViewController {
+    
+    let semaphore = DispatchSemaphore(value: 0)
+
     
     private let nextButton: UIButton = {
         let button = UIButton()
@@ -21,46 +37,37 @@ final class ViewController: UIViewController {
     private let taskLabel: UILabel = {
         let label = UILabel()
         label.text = "Дан сервис, через который записываем фразы в массив, используя цикл"
-        label.textAlignment = .center
         label.numberOfLines = 0
+        label.textAlignment = .center
         label.backgroundColor = .darkGray
         label.translatesAutoresizingMaskIntoConstraints = false
         label.layer.cornerRadius = 20
         return label
     }()
     
-    
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         
         let phrasesService = PhrasesService()
-        let semaphore = DispatchSemaphore(value: 1)
         
         for i in 0..<10 {
-            DispatchQueue.global(qos: .utility).async {
-                semaphore.wait()
-                phrasesService.addPhrase("Phrase \(i)")
-                semaphore.signal()
+                    DispatchQueue.global().async {
+                        Task {
+                            await phrasesService.addPhrase("Phrase \(i)")
+                        }
+                    }
+                }
+                
+                Thread.sleep(forTimeInterval: 1)
+                Task {
+                    let phases = await phrasesService.phrases
+                    print(phases)
+                }
             }
-        }
-        DispatchQueue.main.async {
-            print(phrasesService.phrases)
-        }
-    }
-    
-    class PhrasesService {
-        var phrases: [String] = []
-        
-        func addPhrase(_ phrase: String) {
-            phrases.append(phrase)            
-        }
-    }
     
     @objc func buttonPressed() {
-        let nextViewController = ViewController2()
+        let nextViewController = ViewController3()
         navigationController?.pushViewController(nextViewController, animated: true)
     }
     

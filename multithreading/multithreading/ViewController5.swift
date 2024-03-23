@@ -7,7 +7,9 @@
 
 import UIKit
 
-final class ViewController: UIViewController {
+
+
+final class ViewController5: UIViewController {
     
     private let nextButton: UIButton = {
         let button = UIButton()
@@ -20,47 +22,41 @@ final class ViewController: UIViewController {
     
     private let taskLabel: UILabel = {
         let label = UILabel()
-        label.text = "Дан сервис, через который записываем фразы в массив, используя цикл"
-        label.textAlignment = .center
+        label.text = "Написать как называется проблема №2 в коде и решить ее"
         label.numberOfLines = 0
+        label.textAlignment = .center
         label.backgroundColor = .darkGray
         label.translatesAutoresizingMaskIntoConstraints = false
         label.layer.cornerRadius = 20
         return label
     }()
     
-    
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         
-        let phrasesService = PhrasesService()
-        let semaphore = DispatchSemaphore(value: 1)
+        var sharedResource = 0
+        let queue = DispatchQueue(label: "queue") // гонка данных из-за одновременного доступа к общему ресурсу sharedResource из нескольких потоков без синхронизации
         
-        for i in 0..<10 {
-            DispatchQueue.global(qos: .utility).async {
-                semaphore.wait()
-                phrasesService.addPhrase("Phrase \(i)")
-                semaphore.signal()
+        DispatchQueue.global(qos: .background).async {
+            for _ in 1...100 {
+                queue.sync {
+                    sharedResource += 1
+                }
             }
         }
-        DispatchQueue.main.async {
-            print(phrasesService.phrases)
-        }
-    }
-    
-    class PhrasesService {
-        var phrases: [String] = []
         
-        func addPhrase(_ phrase: String) {
-            phrases.append(phrase)            
+        DispatchQueue.global(qos: .background).async {
+            for _ in 1...100 {
+                queue.sync {
+                    sharedResource += 1
+                }
+            }
         }
     }
     
     @objc func buttonPressed() {
-        let nextViewController = ViewController2()
+        let nextViewController = ViewController6()
         navigationController?.pushViewController(nextViewController, animated: true)
     }
     

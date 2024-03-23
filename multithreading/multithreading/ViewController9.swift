@@ -7,7 +7,21 @@
 
 import UIKit
 
-final class ViewController: UIViewController {
+final class Post: Sendable {
+    
+}
+
+enum State1: Sendable {
+    case loading
+    case data(String)
+}
+
+enum State2: Sendable {
+    case loading
+    case data(Post) //Ошибка возникает из-за того, что тип данных String является Sendable, а тип данных Post не является
+}
+
+final class ViewController9: UIViewController {
     
     private let nextButton: UIButton = {
         let button = UIButton()
@@ -20,9 +34,9 @@ final class ViewController: UIViewController {
     
     private let taskLabel: UILabel = {
         let label = UILabel()
-        label.text = "Дан сервис, через который записываем фразы в массив, используя цикл"
-        label.textAlignment = .center
+        label.text = "Объяснить почему в первом случае ошибка, а во втором ее нет"
         label.numberOfLines = 0
+        label.textAlignment = .center
         label.backgroundColor = .darkGray
         label.translatesAutoresizingMaskIntoConstraints = false
         label.layer.cornerRadius = 20
@@ -30,37 +44,15 @@ final class ViewController: UIViewController {
     }()
     
     
-    
-    
     override func viewDidLoad() {
-        super.viewDidLoad()
+            super.viewDidLoad()
         setupUI()
         
-        let phrasesService = PhrasesService()
-        let semaphore = DispatchSemaphore(value: 1)
-        
-        for i in 0..<10 {
-            DispatchQueue.global(qos: .utility).async {
-                semaphore.wait()
-                phrasesService.addPhrase("Phrase \(i)")
-                semaphore.signal()
-            }
-        }
-        DispatchQueue.main.async {
-            print(phrasesService.phrases)
-        }
     }
     
-    class PhrasesService {
-        var phrases: [String] = []
-        
-        func addPhrase(_ phrase: String) {
-            phrases.append(phrase)            
-        }
-    }
     
     @objc func buttonPressed() {
-        let nextViewController = ViewController2()
+        let nextViewController = ViewController10()
         navigationController?.pushViewController(nextViewController, animated: true)
     }
     
@@ -81,5 +73,3 @@ final class ViewController: UIViewController {
         nextButton.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     }
 }
-
-

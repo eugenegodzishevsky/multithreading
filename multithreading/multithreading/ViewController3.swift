@@ -7,7 +7,9 @@
 
 import UIKit
 
-final class ViewController: UIViewController {
+
+
+final class ViewController3: UIViewController {
     
     private let nextButton: UIButton = {
         let button = UIButton()
@@ -20,47 +22,64 @@ final class ViewController: UIViewController {
     
     private let taskLabel: UILabel = {
         let label = UILabel()
-        label.text = "Дан сервис, через который записываем фразы в массив, используя цикл"
-        label.textAlignment = .center
+        label.text = "Исправить AsyncWorker так чтобы комплишн возвращал сразу 5 постов"
         label.numberOfLines = 0
+        label.textAlignment = .center
         label.backgroundColor = .darkGray
         label.translatesAutoresizingMaskIntoConstraints = false
         label.layer.cornerRadius = 20
         return label
     }()
     
-    
-    
-    
     override func viewDidLoad() {
-        super.viewDidLoad()
+            super.viewDidLoad()
         setupUI()
         
-        let phrasesService = PhrasesService()
-        let semaphore = DispatchSemaphore(value: 1)
-        
-        for i in 0..<10 {
-            DispatchQueue.global(qos: .utility).async {
-                semaphore.wait()
-                phrasesService.addPhrase("Phrase \(i)")
-                semaphore.signal()
+            let asyncWorker = AsyncWorker()
+          
+            asyncWorker.doJobs(postNumbers: 1, 2, 3, 4, 5) { posts in
+                print(Thread.current)
+                print(posts.map { $0.id })
+            }
+      }
+
+
+    class AsyncWorker {
+        func doJobs(postNumbers: Int..., completion: @escaping ([Post]) -> Void) {
+            var posts = [Post]()
+            let group = DispatchGroup()
+            
+            for i in postNumbers {
+                group.enter()
+                URLSession.shared.dataTask(with: URLRequest(url: URL(string: "https://jsonplaceholder.typicode.com/todos/\(i)")!)) { data, response, error in
+                    guard let data = data else {
+                        return
+                    }
+
+                    
+                    if let post = try? JSONDecoder().decode(Post.self, from: data) {
+                        posts.append(post)
+                        group.leave()
+                    }
+                }
+                .resume()
+            }
+            
+            group.notify(queue: .main) {
+                completion(posts)
             }
         }
-        DispatchQueue.main.async {
-            print(phrasesService.phrases)
-        }
     }
-    
-    class PhrasesService {
-        var phrases: [String] = []
-        
-        func addPhrase(_ phrase: String) {
-            phrases.append(phrase)            
-        }
+
+    struct Post: Codable {
+        var userId: Int
+        var id: Int
+        var title: String
+        var completed: Bool
     }
     
     @objc func buttonPressed() {
-        let nextViewController = ViewController2()
+        let nextViewController = ViewController4()
         navigationController?.pushViewController(nextViewController, animated: true)
     }
     

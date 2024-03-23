@@ -1,3 +1,4 @@
+
 //
 //  ViewController.swift
 //  multithreading
@@ -6,9 +7,13 @@
 //
 
 import UIKit
-
-final class ViewController: UIViewController {
     
+class ViewController13: UIViewController {
+    
+    // В предыдущем файле  операции выполняются последовательно, так как операции запускаются сразу после добавления в очередь.
+    // В этом файле операции выполняются параллельно
+
+
     private let nextButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -20,47 +25,36 @@ final class ViewController: UIViewController {
     
     private let taskLabel: UILabel = {
         let label = UILabel()
-        label.text = "Дан сервис, через который записываем фразы в массив, используя цикл"
-        label.textAlignment = .center
+        label.text = "Давайте теперь используя прошлую RMOperation еще и свою OperationQueue напишем для понимания. Теперь используйте в таком же примере Operation и OperationQueue от Swift и сравните"
         label.numberOfLines = 0
+        label.textAlignment = .center
         label.backgroundColor = .darkGray
         label.translatesAutoresizingMaskIntoConstraints = false
         label.layer.cornerRadius = 20
         return label
     }()
     
-    
-    
-    
     override func viewDidLoad() {
-        super.viewDidLoad()
+            super.viewDidLoad()
         setupUI()
         
-        let phrasesService = PhrasesService()
-        let semaphore = DispatchSemaphore(value: 1)
-        
-        for i in 0..<10 {
-            DispatchQueue.global(qos: .utility).async {
-                semaphore.wait()
-                phrasesService.addPhrase("Phrase \(i)")
-                semaphore.signal()
-            }
-        }
-        DispatchQueue.main.async {
-            print(phrasesService.phrases)
-        }
-    }
-    
-    class PhrasesService {
-        var phrases: [String] = []
-        
-        func addPhrase(_ phrase: String) {
-            phrases.append(phrase)            
-        }
+        let operationQueue = OperationQueue()
+               
+               let operation1 = BlockOperation {
+                   print(1)
+               }
+        operation1.queuePriority = .low
+               
+               let operation2 = BlockOperation {
+                   print(2)
+               }
+               operation2.queuePriority = .high
+               
+               operationQueue.addOperations([operation1, operation2], waitUntilFinished: false)
     }
     
     @objc func buttonPressed() {
-        let nextViewController = ViewController2()
+        let nextViewController = ViewController14()
         navigationController?.pushViewController(nextViewController, animated: true)
     }
     
@@ -81,5 +75,3 @@ final class ViewController: UIViewController {
         nextButton.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     }
 }
-
-
