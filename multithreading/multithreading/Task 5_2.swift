@@ -1,68 +1,56 @@
+
 //
-//  Task 2_2_7.swift
+//  ViewController.swift
 //  multithreading
 //
-//  Created by Vermut xxx on 20.03.2024.
+//  Created by Vermut xxx on 19.03.2024.
 //
 
 import UIKit
-
-final class Task_2_2_7: UIViewController {
     
+class Task_5_2: UIViewController {
+
+
     private let nextButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("next", for: .normal)
         button.backgroundColor = .darkGray
         button.layer.cornerRadius = 10
-    return button
+        return button
     }()
     
     private let taskLabel: UILabel = {
         let label = UILabel()
-        label.text = "Написать какая тут проблема?"
+        label.text = "Чем этот вариант отличается от обычного Task?"
+        label.numberOfLines = 0
         label.textAlignment = .center
         label.backgroundColor = .darkGray
-        label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         label.layer.cornerRadius = 20
         return label
     }()
     
-    private var lock = NSLock()
-    
-    private lazy var name = "I love RM"
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        updateName()
-    }
-    
-    func updateName() {
-        DispatchQueue.global().async {
-            self.lock.lock()
-            defer { self.lock.unlock() }
-            print(self.name) // Считываем имя из global
-            print(Thread.current)
+        //В этом варианте @MainActor указывает, что асинхронная задача должна выполняться на главном потоке.
+        print(1)
+        Task { @MainActor  in
+            print(2)
         }
         
-        self.lock.lock()
-        defer { self.lock.unlock() }
-        print(self.name) // Считываем имя из main
+        print(3)
     }
     
-    // Доступ свойству name осуществляется из разных потоков без какой-либо синхронизации. Это может привести к состоянию гонки (race condition)
-    //  Использование объекта NSLock позволяет создать критическую секцию, в которой только один поток может выполняться одновременно.
-    
     @objc func buttonPressed() {
-        let nextViewController = ViewController()
+        let nextViewController = Task_5_3()
         navigationController?.pushViewController(nextViewController, animated: true)
     }
     
     private func setupUI() {
         nextButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
-
+        
         view.addSubview(nextButton)
         view.addSubview(taskLabel)
         
@@ -70,11 +58,10 @@ final class Task_2_2_7: UIViewController {
         taskLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 90).isActive = true
         taskLabel.bottomAnchor.constraint(equalTo: view.topAnchor, constant: 140).isActive = true
         taskLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-
+        
         
         nextButton.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
         nextButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         nextButton.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     }
 }
-

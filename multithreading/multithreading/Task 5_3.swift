@@ -1,68 +1,73 @@
+
 //
-//  Task 2_2_7.swift
+//  ViewController.swift
 //  multithreading
 //
-//  Created by Vermut xxx on 20.03.2024.
+//  Created by Vermut xxx on 19.03.2024.
 //
 
 import UIKit
-
-final class Task_2_2_7: UIViewController {
     
+class Task_5_3: UIViewController {
+
+
     private let nextButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("next", for: .normal)
         button.backgroundColor = .darkGray
         button.layer.cornerRadius = 10
-    return button
+        return button
     }()
     
     private let taskLabel: UILabel = {
         let label = UILabel()
-        label.text = "Написать какая тут проблема?"
+        label.text = "Заменить DispatchQueue.global().async на Task.detached, объяснить в чем разница"
+        label.numberOfLines = 0
         label.textAlignment = .center
         label.backgroundColor = .darkGray
-        label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         label.layer.cornerRadius = 20
         return label
     }()
     
-    private var lock = NSLock()
-    
-    private lazy var name = "I love RM"
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        updateName()
-    }
-    
-    func updateName() {
-        DispatchQueue.global().async {
-            self.lock.lock()
-            defer { self.lock.unlock() }
-            print(self.name) // Считываем имя из global
+        
+        print("Task 1 is finished")
+        
+        //        DispatchQueue.global().async {
+        //            for i in 0..<50 {
+        //                print(i)
+        //            }
+        //            print("Task 2 is finished")
+        //            print(Thread.current)
+        //        }
+        
+        
+        // когда мы используем Task.detached, мы создаем отсоединенную задачу (detached task), которая также выполняется в фоновом потоке. Отсоединенные задачи - это асинхронные задачи, которые не ожидают результатов своего выполнения и не блокируют основной поток.
+        
+        Task.detached {
+            for i in 0..<50 {
+                print(i)
+            }
+            print("Task 2 is finished")
             print(Thread.current)
+
         }
         
-        self.lock.lock()
-        defer { self.lock.unlock() }
-        print(self.name) // Считываем имя из main
+        print("Task 3 is finished")
     }
-    
-    // Доступ свойству name осуществляется из разных потоков без какой-либо синхронизации. Это может привести к состоянию гонки (race condition)
-    //  Использование объекта NSLock позволяет создать критическую секцию, в которой только один поток может выполняться одновременно.
-    
+
     @objc func buttonPressed() {
-        let nextViewController = ViewController()
+        let nextViewController = Task_5_4()
         navigationController?.pushViewController(nextViewController, animated: true)
     }
     
     private func setupUI() {
         nextButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
-
+        
         view.addSubview(nextButton)
         view.addSubview(taskLabel)
         
@@ -70,11 +75,10 @@ final class Task_2_2_7: UIViewController {
         taskLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 90).isActive = true
         taskLabel.bottomAnchor.constraint(equalTo: view.topAnchor, constant: 140).isActive = true
         taskLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-
+        
         
         nextButton.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
         nextButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         nextButton.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     }
 }
-
