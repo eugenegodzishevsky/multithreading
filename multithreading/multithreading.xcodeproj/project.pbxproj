@@ -22,6 +22,21 @@
 		DA56E2DE2BAAC0CE00DE8CD9 /* Task 2_2_5.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA56E2DD2BAAC0CD00DE8CD9 /* Task 2_2_5.swift */; };
 		DA56E2E02BAAD78000DE8CD9 /* Task 2_2_6.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA56E2DF2BAAD78000DE8CD9 /* Task 2_2_6.swift */; };
 		DA56E2E22BAADC0100DE8CD9 /* Task 2_2_7.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA56E2E12BAADC0100DE8CD9 /* Task 2_2_7.swift */; };
+		DAB664912BB0FA2D0087A2FE /* Task 3_1.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB664902BB0FA2D0087A2FE /* Task 3_1.swift */; };
+		DAB664932BB0FA620087A2FE /* Task 3_1_2.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB664922BB0FA620087A2FE /* Task 3_1_2.swift */; };
+		DAB664952BB0FA870087A2FE /* Task 3_2.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB664942BB0FA870087A2FE /* Task 3_2.swift */; };
+		DAB664992BB0FB3D0087A2FE /* Task 3_3.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB664982BB0FB3D0087A2FE /* Task 3_3.swift */; };
+		DAB6649B2BB0FB600087A2FE /* Task 3_3_2.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB6649A2BB0FB600087A2FE /* Task 3_3_2.swift */; };
+		DAB6649D2BB0FB770087A2FE /* Task 3_3_3.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB6649C2BB0FB770087A2FE /* Task 3_3_3.swift */; };
+		DAB6649F2BB0FB910087A2FE /* Task 3_3_4.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB6649E2BB0FB910087A2FE /* Task 3_3_4.swift */; };
+		DAB664A12BB0FBB10087A2FE /* Task 3_4.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB664A02BB0FBB10087A2FE /* Task 3_4.swift */; };
+		DAB664A32BB0FBD40087A2FE /* Task 4_1.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB664A22BB0FBD40087A2FE /* Task 4_1.swift */; };
+		DAB664A52BB0FBEC0087A2FE /* Task 4_2.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB664A42BB0FBEC0087A2FE /* Task 4_2.swift */; };
+		DAB664A72BB0FC0B0087A2FE /* Task 4_2_2.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB664A62BB0FC0B0087A2FE /* Task 4_2_2.swift */; };
+		DAB664A92BB0FC1D0087A2FE /* Task 4_3.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB664A82BB0FC1D0087A2FE /* Task 4_3.swift */; };
+		DAB664AB2BB0FC3F0087A2FE /* Task 4_3_2.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB664AA2BB0FC3F0087A2FE /* Task 4_3_2.swift */; };
+		DAB664AD2BB0FC5D0087A2FE /* Task 4_4.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB664AC2BB0FC5D0087A2FE /* Task 4_4.swift */; };
+		DAB664AF2BB0FC740087A2FE /* Task 4_4_2.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB664AE2BB0FC740087A2FE /* Task 4_4_2.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +57,21 @@
 		DA56E2DD2BAAC0CD00DE8CD9 /* Task 2_2_5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task 2_2_5.swift"; sourceTree = "<group>"; };
 		DA56E2DF2BAAD78000DE8CD9 /* Task 2_2_6.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task 2_2_6.swift"; sourceTree = "<group>"; };
 		DA56E2E12BAADC0100DE8CD9 /* Task 2_2_7.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task 2_2_7.swift"; sourceTree = "<group>"; };
+		DAB664902BB0FA2D0087A2FE /* Task 3_1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task 3_1.swift"; sourceTree = "<group>"; };
+		DAB664922BB0FA620087A2FE /* Task 3_1_2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task 3_1_2.swift"; sourceTree = "<group>"; };
+		DAB664942BB0FA870087A2FE /* Task 3_2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task 3_2.swift"; sourceTree = "<group>"; };
+		DAB664982BB0FB3D0087A2FE /* Task 3_3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task 3_3.swift"; sourceTree = "<group>"; };
+		DAB6649A2BB0FB600087A2FE /* Task 3_3_2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task 3_3_2.swift"; sourceTree = "<group>"; };
+		DAB6649C2BB0FB770087A2FE /* Task 3_3_3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task 3_3_3.swift"; sourceTree = "<group>"; };
+		DAB6649E2BB0FB910087A2FE /* Task 3_3_4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task 3_3_4.swift"; sourceTree = "<group>"; };
+		DAB664A02BB0FBB10087A2FE /* Task 3_4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task 3_4.swift"; sourceTree = "<group>"; };
+		DAB664A22BB0FBD40087A2FE /* Task 4_1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task 4_1.swift"; sourceTree = "<group>"; };
+		DAB664A42BB0FBEC0087A2FE /* Task 4_2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task 4_2.swift"; sourceTree = "<group>"; };
+		DAB664A62BB0FC0B0087A2FE /* Task 4_2_2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task 4_2_2.swift"; sourceTree = "<group>"; };
+		DAB664A82BB0FC1D0087A2FE /* Task 4_3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task 4_3.swift"; sourceTree = "<group>"; };
+		DAB664AA2BB0FC3F0087A2FE /* Task 4_3_2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task 4_3_2.swift"; sourceTree = "<group>"; };
+		DAB664AC2BB0FC5D0087A2FE /* Task 4_4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task 4_4.swift"; sourceTree = "<group>"; };
+		DAB664AE2BB0FC740087A2FE /* Task 4_4_2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task 4_4_2.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +116,21 @@
 				DA56E2DD2BAAC0CD00DE8CD9 /* Task 2_2_5.swift */,
 				DA56E2DF2BAAD78000DE8CD9 /* Task 2_2_6.swift */,
 				DA56E2E12BAADC0100DE8CD9 /* Task 2_2_7.swift */,
+				DAB664902BB0FA2D0087A2FE /* Task 3_1.swift */,
+				DAB664922BB0FA620087A2FE /* Task 3_1_2.swift */,
+				DAB664942BB0FA870087A2FE /* Task 3_2.swift */,
+				DAB664982BB0FB3D0087A2FE /* Task 3_3.swift */,
+				DAB6649A2BB0FB600087A2FE /* Task 3_3_2.swift */,
+				DAB6649C2BB0FB770087A2FE /* Task 3_3_3.swift */,
+				DAB6649E2BB0FB910087A2FE /* Task 3_3_4.swift */,
+				DAB664A02BB0FBB10087A2FE /* Task 3_4.swift */,
+				DAB664A22BB0FBD40087A2FE /* Task 4_1.swift */,
+				DAB664A42BB0FBEC0087A2FE /* Task 4_2.swift */,
+				DAB664A62BB0FC0B0087A2FE /* Task 4_2_2.swift */,
+				DAB664A82BB0FC1D0087A2FE /* Task 4_3.swift */,
+				DAB664AA2BB0FC3F0087A2FE /* Task 4_3_2.swift */,
+				DAB664AC2BB0FC5D0087A2FE /* Task 4_4.swift */,
+				DAB664AE2BB0FC740087A2FE /* Task 4_4_2.swift */,
 				DA56E2BD2BA8976700DE8CD9 /* Main.storyboard */,
 				DA56E2C02BA8976800DE8CD9 /* Assets.xcassets */,
 				DA56E2C22BA8976800DE8CD9 /* LaunchScreen.storyboard */,
@@ -165,16 +210,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DAB6649F2BB0FB910087A2FE /* Task 3_3_4.swift in Sources */,
+				DAB664932BB0FA620087A2FE /* Task 3_1_2.swift in Sources */,
+				DAB6649B2BB0FB600087A2FE /* Task 3_3_2.swift in Sources */,
+				DAB664992BB0FB3D0087A2FE /* Task 3_3.swift in Sources */,
+				DAB6649D2BB0FB770087A2FE /* Task 3_3_3.swift in Sources */,
+				DAB664952BB0FA870087A2FE /* Task 3_2.swift in Sources */,
+				DAB664A12BB0FBB10087A2FE /* Task 3_4.swift in Sources */,
 				DA56E2DC2BAABADB00DE8CD9 /* Task 2_2_4.swift in Sources */,
 				DA56E2BC2BA8976700DE8CD9 /* Task 1.swift in Sources */,
+				DAB664AD2BB0FC5D0087A2FE /* Task 4_4.swift in Sources */,
 				DA56E2D82BAA6BCE00DE8CD9 /* Task 2_2_2.swift in Sources */,
+				DAB664A72BB0FC0B0087A2FE /* Task 4_2_2.swift in Sources */,
 				DA56E2E22BAADC0100DE8CD9 /* Task 2_2_7.swift in Sources */,
+				DAB664A52BB0FBEC0087A2FE /* Task 4_2.swift in Sources */,
 				DA56E2B82BA8976700DE8CD9 /* AppDelegate.swift in Sources */,
+				DAB664912BB0FA2D0087A2FE /* Task 3_1.swift in Sources */,
 				DA56E2DA2BAA6C3D00DE8CD9 /* Task 2_2_3.swift in Sources */,
+				DAB664AF2BB0FC740087A2FE /* Task 4_4_2.swift in Sources */,
 				DA56E2D42BA9EB8800DE8CD9 /* Task 2.swift in Sources */,
 				DA56E2D22BA8A2F700DE8CD9 /* Task 1_2.swift in Sources */,
+				DAB664A92BB0FC1D0087A2FE /* Task 4_3.swift in Sources */,
 				DA56E2BA2BA8976700DE8CD9 /* SceneDelegate.swift in Sources */,
 				DA56E2DE2BAAC0CE00DE8CD9 /* Task 2_2_5.swift in Sources */,
+				DAB664AB2BB0FC3F0087A2FE /* Task 4_3_2.swift in Sources */,
+				DAB664A32BB0FBD40087A2FE /* Task 4_1.swift in Sources */,
 				DA56E2D62BAA695C00DE8CD9 /* Task 2_2.swift in Sources */,
 				DA56E2E02BAAD78000DE8CD9 /* Task 2_2_6.swift in Sources */,
 			);
