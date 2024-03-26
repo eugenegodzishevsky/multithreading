@@ -1,13 +1,14 @@
+
 //
-//  Task 2_2_7.swift
+//  ViewController.swift
 //  multithreading
 //
-//  Created by Vermut xxx on 20.03.2024.
+//  Created by Vermut xxx on 19.03.2024.
 //
 
 import UIKit
-
-final class Task_2_2_7: UIViewController {
+    
+class Task_5_7: UIViewController {
     
     private let nextButton: UIButton = {
         let button = UIButton()
@@ -15,54 +16,58 @@ final class Task_2_2_7: UIViewController {
         button.setTitle("next", for: .normal)
         button.backgroundColor = .darkGray
         button.layer.cornerRadius = 10
-    return button
+        return button
     }()
     
     private let taskLabel: UILabel = {
         let label = UILabel()
-        label.text = "Написать какая тут проблема?"
+        label.text = "Разберитесь как работает. ОТМените задачу fetchTask"
+        label.numberOfLines = 0
         label.textAlignment = .center
         label.backgroundColor = .darkGray
-        label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         label.layer.cornerRadius = 20
         return label
     }()
     
-    private var lock = NSLock()
-    
-    private lazy var name = "I love RM"
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        updateName()
-    }
-    
-    func updateName() {
-        DispatchQueue.global().async {
-            self.lock.lock()
-            defer { self.lock.unlock() }
-            print(self.name) // Считываем имя из global
-            print(Thread.current)
-        }
         
-        self.lock.lock()
-        defer { self.lock.unlock() }
-        print(self.name) // Считываем имя из main
+        Task {
+            await getAverageTemperature()
+        }
     }
     
-    // Доступ свойству name осуществляется из разных потоков без какой-либо синхронизации. Это может привести к состоянию гонки (race condition)
-    //  Использование объекта NSLock позволяет создать критическую секцию, в которой только один поток может выполняться одновременно.
+    func getAverageTemperature() async {
+                let fetchTask = Task { () -> Double in
+                    let url = URL(string: "https://hws.dev/readings.json")!
+                    let (data, _) = try await URLSession.shared.data(from: url)
+                    let readings = try JSONDecoder().decode([Double].self, from: data)
+                    let sum = readings.reduce(0, +)
+                    return sum / Double(readings.count)
+                }
+                
+               // Тут отменить задачу
+                fetchTask.cancel()
+
+                do {
+                    let result = try await fetchTask.value
+                    print("Average temperature: \(result)")
+                } catch {
+                    print("Failed to get data.")
+                }
+            }
     
+
     @objc func buttonPressed() {
-        let nextViewController = ViewController()
+        let nextViewController = Task_5_8()
         navigationController?.pushViewController(nextViewController, animated: true)
     }
     
     private func setupUI() {
         nextButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
-
+        
         view.addSubview(nextButton)
         view.addSubview(taskLabel)
         
@@ -70,11 +75,10 @@ final class Task_2_2_7: UIViewController {
         taskLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 90).isActive = true
         taskLabel.bottomAnchor.constraint(equalTo: view.topAnchor, constant: 140).isActive = true
         taskLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-
+        
         
         nextButton.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
         nextButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         nextButton.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     }
 }
-

@@ -1,13 +1,14 @@
+
 //
-//  Task 2_2_7.swift
+//  ViewController.swift
 //  multithreading
 //
-//  Created by Vermut xxx on 20.03.2024.
+//  Created by Vermut xxx on 19.03.2024.
 //
 
 import UIKit
-
-final class Task_2_2_7: UIViewController {
+    
+class Task_5_8: UIViewController {
     
     private let nextButton: UIButton = {
         let button = UIButton()
@@ -15,54 +16,73 @@ final class Task_2_2_7: UIViewController {
         button.setTitle("next", for: .normal)
         button.backgroundColor = .darkGray
         button.layer.cornerRadius = 10
-    return button
+        return button
     }()
     
     private let taskLabel: UILabel = {
         let label = UILabel()
-        label.text = "Написать какая тут проблема?"
+        label.text = "Разберитесь как работает taskGroup. Добавить в метод printMessage в group 5 строк"
+        label.numberOfLines = 0
         label.textAlignment = .center
         label.backgroundColor = .darkGray
-        label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         label.layer.cornerRadius = 20
         return label
     }()
     
-    private var lock = NSLock()
-    
-    private lazy var name = "I love RM"
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        updateName()
-    }
-    
-    func updateName() {
-        DispatchQueue.global().async {
-            self.lock.lock()
-            defer { self.lock.unlock() }
-            print(self.name) // Считываем имя из global
-            print(Thread.current)
+        
+        Task {
+            await printMessage()
         }
         
-        self.lock.lock()
-        defer { self.lock.unlock() }
-        print(self.name) // Считываем имя из main
     }
     
-    // Доступ свойству name осуществляется из разных потоков без какой-либо синхронизации. Это может привести к состоянию гонки (race condition)
-    //  Использование объекта NSLock позволяет создать критическую секцию, в которой только один поток может выполняться одновременно.
-    
+    func printMessage() async {
+        let string = await withTaskGroup(of: String.self) { group -> String in
+            // тут добавляем строки в группу
+            group.addTask {
+                "Hello"
+            }
+            
+            group.addTask {
+                "My"
+            }
+            
+            group.addTask {
+                "Road"
+            }
+            
+            group.addTask {
+                "Map"
+            }
+            
+            group.addTask {
+                "Group"
+            }
+            
+            var collected = [String]()
+            
+            for await value in group {
+                collected.append(value)
+            }
+            
+            return collected.joined(separator: " ")
+        }
+        
+        print(string)
+    }
+
     @objc func buttonPressed() {
-        let nextViewController = ViewController()
-        navigationController?.pushViewController(nextViewController, animated: true)
+//        let nextViewController = Task_5_8()
+//        navigationController?.pushViewController(nextViewController, animated: true)
     }
     
     private func setupUI() {
         nextButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
-
+        
         view.addSubview(nextButton)
         view.addSubview(taskLabel)
         
@@ -70,11 +90,10 @@ final class Task_2_2_7: UIViewController {
         taskLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 90).isActive = true
         taskLabel.bottomAnchor.constraint(equalTo: view.topAnchor, constant: 140).isActive = true
         taskLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-
+        
         
         nextButton.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
         nextButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         nextButton.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     }
 }
-

@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ViewController: UIViewController {
+final class Task_1: UIViewController {
     
     private let nextButton: UIButton = {
         let button = UIButton()
